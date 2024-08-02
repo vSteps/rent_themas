@@ -1,6 +1,5 @@
 from .models import *
 import datetime
-import calendar
 
 class RentServices():
     def salvarRent(self, request):
@@ -21,10 +20,7 @@ class RentServices():
             address = a )
 
 
-        t = Theme(
-            price=request.POST['price'],
-                )   
-
+        t = Theme(price=request.POST['price'],)   
 
         given_date = datetime.datetime.strptime(r.date, "%Y-%m-%d")
         if not given_date.weekday() == 4 or given_date.weekday() == 5 or given_date.weekday() == 6:
@@ -36,4 +32,5 @@ class RentServices():
             t.price = float(t.price) - (float(t.price) * 0.10)
         if not (comprou_antes == False) and (given_date.weekday() == 5 or given_date.weekday() == 6 or given_date.isoweekday() == 7):
             t.price = float(t.price) - (float(t.price) * 0.5)
-        return r.save()
+
+        return t.save() 
